@@ -6,7 +6,7 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 
 // filters array by category via filteredResults
-// continue 11.1.6
+// continue 11.1.6 (video)
 function filterByQuery(query, animalsArray) {
     let personalityTraitsArray = [];
 
