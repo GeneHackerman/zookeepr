@@ -1,9 +1,27 @@
+const fs = require('fs');
+const path = require('path');
+
 const { animals } = require('./data/animals');
 
 
 const express = require('express');
 const PORT = process.env.PORT || 3001;
 const app = express();
+
+// parse incoming string or array data
+// Takes incoming POST data and converts to key/value pairing
+// that is accessed in req.body object.
+// ({extended:true}) option set inside method call informs server there 
+// may be sub-array data nested in as well, so it will look deep into POST
+// data as possible to parse data correctly.
+// THIS MUST BE SETUP EVERY TIME YOU CREATE A SERVER THAT ACCEPTS POST DATA
+app.use(express.urlencoded({ extended: true }));
+
+// parse incoming JSON data
+// this method takes incoming POST data in the form of JSON and parses
+// it into req.body JavaScript object.
+// THIS MUST BE SETUP EVERY TIME YOU CREATE A SERVER THAT ACCEPTS POST DATA
+app.use(express.json());
 
 // filters array by category via filteredResults
 // continue 11.1.6 (video)
@@ -53,6 +71,39 @@ function findById(id, animalsArray) {
     return result;
 }
 
+function createNewAnimal(body, animalsArray) {
+    console.log(body);
+    
+    // our function's main code will go here!
+    const animal = body;
+    animalsArray.push(animal);
+    fs.writeFileSync(
+        path.join(__dirname, './data/animals.json'),
+        JSON.stringify({ animals: animalsArray }, null, 2)
+    );
+
+    return animal;
+
+    // return finished code to post route for response
+    // return body;
+}
+
+function validateAnimal(animal) {
+    if (!animal.name || typeof animal.name !== 'string') {
+        return false;
+    }
+    if (!animal.species || typeof animal.species !== 'string') {
+        return false;
+    }
+    if (!animal.diet || typeof animal.diet !== 'string') {
+        return false;
+    }
+    if (!animal.personalityTraits || !Array.isArray(animal.personalityTraits)) {
+        return false;
+    }
+    return true;
+}
+
 // get allows for request and response
 app.get('/api/animals', (req, res) => {
     let results = animals;
@@ -72,6 +123,26 @@ app.get('/api/animals/:id', (req, res) => {
     } else {
         res.send(404);
     }
+});
+
+app.post('/api/animals', (req, res) => {
+    // set id based on what the next index of the array will be
+    req.body.id = animals.length.toString();
+
+    // if any data in req.body is incorrect, send 400 error back
+    if (!validateAnimal(req.body)) {
+        res.status(400).send('The animal is not properly formatted.');
+    } else {
+        const animal = createNewAnimal(req.body, animals);
+        res.json(animal);
+    }
+
+    // add animal to json file and animals array in this function
+    // const animal = createNewAnimal(req.body, animals);
+
+    // req.body is where our incoming content will be
+    console.log(req.body);
+    // res.json(animal);
 });
 
 // will listen for which port
