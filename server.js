@@ -23,8 +23,26 @@ app.use(express.urlencoded({ extended: true }));
 // THIS MUST BE SETUP EVERY TIME YOU CREATE A SERVER THAT ACCEPTS POST DATA
 app.use(express.json());
 
+// this method will pull assets from public directory
+app.use(express.static('public'));
+
+// this route will fetch animals.html
+app.get('/animals', (req,res) => {
+    res.sendFile(path.join(__dirname, './public/animals.html'));
+});
+
+// this route will fetch zookkeepers.html
+app.get('/zookeepers', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/zookeepers.html'));
+});
+
+// this wildcard * will allow other requests to receive the homepage
+// /about, /contact, or /membership are all the same now
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/index.html'));
+});
+
 // filters array by category via filteredResults
-// continue 11.1.6 (video)
 function filterByQuery(query, animalsArray) {
     let personalityTraitsArray = [];
 
@@ -143,6 +161,12 @@ app.post('/api/animals', (req, res) => {
     // req.body is where our incoming content will be
     console.log(req.body);
     // res.json(animal);
+});
+
+// this route creates homepage for the server
+// path module will find correct location of html file(any file)
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/index.html'));
 });
 
 // will listen for which port

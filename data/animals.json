@@ -198,6 +198,63 @@
         "hungry"
       ],
       "id": "20"
+    },
+    {
+      "name": "Larry",
+      "species": "Lemur",
+      "diet": "omnivore",
+      "personalityTraits": [
+        "hungry"
+      ],
+      "id": "21"
+    },
+    {
+      "name": "Larry",
+      "species": "Lemur",
+      "diet": "omnivore",
+      "personalityTraits": [
+        "hungry"
+      ],
+      "id": "22"
+    },
+    {
+      "name": "Harry",
+      "species": "Ox",
+      "diet": "herbivore",
+      "personalityTraits": [
+        "loving"
+      ],
+      "id": "23"
+    },
+    {
+      "name": "Harry",
+      "species": "Ox",
+      "diet": "herbivore",
+      "personalityTraits": [
+        "loving"
+      ],
+      "id": "24"
+    },
+    {
+      "name": "Larry",
+      "species": "Lemur",
+      "diet": "folivore",
+      "personalityTraits": [
+        "zany"
+      ],
+      "id": "25"
+    },
+    {
+      "name": "Barry",
+      "species": "Bull",
+      "diet": "herbivore",
+      "personalityTraits": [
+        "hungry",
+        "anxious",
+        "loving",
+        "goofy"
+      ],
+      "id": "26"
     }
   ]
 }
