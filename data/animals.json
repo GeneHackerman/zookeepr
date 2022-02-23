@@ -255,6 +255,17 @@
         "goofy"
       ],
       "id": "26"
+    },
+    {
+      "name": "Larry",
+      "species": "Lemur",
+      "diet": "herbivore",
+      "personalityTraits": [
+        "hungry",
+        "anxious",
+        "loving"
+      ],
+      "id": "27"
     }
   ]
 }
