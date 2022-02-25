@@ -20,13 +20,15 @@ app.use(express.urlencoded({ extended: true }));
 // THIS MUST BE SETUP EVERY TIME YOU CREATE A SERVER THAT ACCEPTS POST DATA
 app.use(express.json());
 
+app.use(express.static('public'));
+
+
 // this will use router set up in apiRoutes when client goes to host/api
 // if / endpoint, then router will serve back HTML routes
 app.use('/api', apiRoutes);
 app.use('/', htmlRoutes);
 
 // this method will pull assets from public directory
-app.use(express.static('public'));
 
 
 // will listen for which port
