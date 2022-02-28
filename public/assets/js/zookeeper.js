@@ -55,5 +55,5 @@ const handleGetZookeepersSubmit = event => {
   getZookeepers(zookeeperObject);
 };
 
-$zookeeperForm.addEventListener('submit', handleGetZookeeperSubmit);
+$zookeeperForm.addEventListener('submit', handleGetZookeepersSubmit);
 getZookeepers();

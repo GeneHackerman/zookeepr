@@ -11,7 +11,7 @@ const handleZookeeperFormSubmit = event => {
 
   const zookeeperObj = { name, age, favoriteAnimal };
   console.log(zookeeperObj);
-  fetch('api/zookeeperObj', {
+  fetch('api/zookeepers', {
     method: 'POST',
     headers: {
       Accept: 'application/json',
